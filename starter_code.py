@@ -62,7 +62,7 @@ UP = 0
 DOWN = 1
 LEFT = 2
 RIGHT = 3
-
+direction = UP
 UP_EDGE = 250
 DOWN_EDGE = -250
 RIGHT_EDGE = 400
@@ -98,11 +98,37 @@ turtle.onkeypress(left,LEFT_ARROW)
 turtle.listen()
 
 
+def make_food():
+    #The screen positions go from -SIZE/2 to +SIZE/2
+    #But we need to make food pieces only appear on game squares
+    #So we cut up the game board into multiples of SQUARE_SIZE.
+    min_x=-int(SIZE_X/2/SQUARE_SIZE)+1
+    max_x=int(SIZE_X/2/SQUARE_SIZE)-1
+    min_y=-int(SIZE_Y/2/SQUARE_SIZE)-1
+    max_y=int(SIZE_Y/2/SQUARE_SIZE)+1
+    
+    #Pick a position that is a random multiple of SQUARE_SIZE
+    food_x = random.randint(min_x,max_x)*SQUARE_SIZE
+    food_y = random.randint(min_y,max_y)*SQUARE_SIZE
+    food.goto(food_x,food_y)
+    food_pos.append((food_x,food_y))
+    stamp_ID = food.stamp()
+    food_stamps.append(stamp_ID)
+
+        ##1.WRITE YOUR CODE HERE: Make the food turtle go to the randomly-generated
+        ##                        position 
+        ##2.WRITE YOUR CODE HERE: Add the food turtle's position to the food positions list
+        ##3.WRITE YOUR CODE HERE: Add the food turtle's stamp to the food stamps list
+
+    
+
+
+
 def move_snake():
     my_pos = snake.pos()
     x_pos = my_pos[0]
     y_pos = my_pos[1]
-    
+    global direction
     if direction==RIGHT:
         snake.goto(x_pos + SQUARE_SIZE, y_pos)
         print("You moved right!")
@@ -141,7 +167,7 @@ def move_snake():
         food_pos.pop(food_ind) #Remove eaten food position
         food_stamps.pop(food_ind) #Remove eaten food stamp
         print("You have eaten the food!")
-    
+        make_food()
     #HINT: This if statement may be useful for Part 8
 
     ...
@@ -177,7 +203,7 @@ turtle.register_shape("trash.gif") #Add trash picture
 
 food = turtle.clone()
 food.shape("trash.gif")
-food.showturtle()
+food.hideturtle()
 
 #Locations of food
 food_pos = [(100,100), (-100,100), (-100,-100), (100,-100)]
@@ -198,23 +224,4 @@ for this_food_pos in food_pos :
     food_stamps.append(stamp_ID)
     food.pendown()
 
-
-def make_food():
-    #The screen positions go from -SIZE/2 to +SIZE/2
-    #But we need to make food pieces only appear on game squares
-    #So we cut up the game board into multiples of SQUARE_SIZE.
-    min_x=-int(SIZE_X/2/SQUARE_SIZE)+1
-    max_x=int(SIZE_X/2/SQUARE_SIZE)-1
-    min_y=-int(SIZE_Y/2/SQUARE_SIZE)-1
-    max_y=int(SIZE_Y/2/SQUARE_SIZE)+1
-    
-    #Pick a position that is a random multiple of SQUARE_SIZE
-    food_x = random.randint(min_x,max_x)*SQUARE_SIZE
-    food_y = random.randint(min_y,max_y)*SQUARE_SIZE
-
-        ##1.WRITE YOUR CODE HERE: Make the food turtle go to the randomly-generated
-        ##                        position 
-        ##2.WRITE YOUR CODE HERE: Add the food turtle's position to the food positions list
-        ##3.WRITE YOUR CODE HERE: Add the food turtle's stamp to the food stamps list
-
-    
+move_snake()
