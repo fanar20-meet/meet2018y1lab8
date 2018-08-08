@@ -155,7 +155,10 @@ def move_snake():
     new_x_pos = new_pos[0]
     new_y_pos = new_pos[1]
 
-
+        
+    if snake.pos() in pos_list[:-1]:
+        print("you ate yourself ! Game over!")
+        quit()
        
     ######## SPECIAL PLACE - Remember it for Part 5
     global food_stamps, food_pos
@@ -195,6 +198,8 @@ def move_snake():
         quit()
 
 
+
+
 turtle.register_shape("trash.gif") #Add trash picture
                       # Make sure you have downloaded this shape 
                       # from the Google Drive folder and saved it
@@ -218,10 +223,13 @@ food_stamps = []
 
 for this_food_pos in food_pos :
 
-    food.penup()
+
     food.goto(this_food_pos)
+
     stamp_ID = food.stamp()
     food_stamps.append(stamp_ID)
-    food.pendown()
-
+   
 move_snake()
+
+
+
