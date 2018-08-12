@@ -1,10 +1,23 @@
 import turtle
 import random #We'll need this later in the lab
 
+cube = turtle.clone()
+cube.hideturtle()
+cube.penup()
+cube.goto(300,300)
+cube.pendown()
+cube.goto(300,-300)
+cube.goto(-300,-300)
+cube.goto(-300,300)
+cube.goto(300,300)
+
+title =
+
+
 turtle.tracer(1,0) #This helps the turtle move more smoothly
 
-SIZE_X=800
-SIZE_Y=500
+SIZE_X=650
+SIZE_Y=650
 turtle.setup(SIZE_X, SIZE_Y) #Curious? It's the turtle window  
                              #size. 
 turtle.penup()
@@ -20,7 +33,8 @@ food_stamps = []
 
 #Set up positions (x,y) of boxes that make up the snake
 snake = turtle.clone()
-snake.shape("square")
+snake.shape("arrow")
+snake.color('red')
 
 #Hide the turtle object (it's an arrow - we don't need to see it)
 turtle.hideturtle()
@@ -63,33 +77,33 @@ DOWN = 1
 LEFT = 2
 RIGHT = 3
 direction = UP
-UP_EDGE = 250
-DOWN_EDGE = -250
-RIGHT_EDGE = 400
-LEFT_EDGE = -400
+UP_EDGE = 300
+DOWN_EDGE = -300
+RIGHT_EDGE = 300
+LEFT_EDGE = -300
 
 def up():
     global direction #snake direction is global (same everywhere)
     direction=UP #Change direction to up
     
-    move_snake() #Update the snake drawing <- remember me later
+    #Update the snake drawing <- remember me later
     print("You pressed the up key!")
 def down():
     global direction
     direction=DOWN
-    move_snake()
+    
     print("you pressed the down key!")
 def left():
     global direction
     direction=LEFT
-    move_snake()
+    
     print("you pressed the left key!")
 def right():
     global direction 
     direction = RIGHT
-    move_snake()
+    
     print("you pressed the right key!")
-
+snake.color('yellow')
 turtle.onkeypress(up,UP_ARROW)
 turtle.onkeypress(down,DOWN_ARROW)
 turtle.onkeypress(right,RIGHT_ARROW)
@@ -147,15 +161,13 @@ def move_snake():
     new_stamp = snake.stamp()
     stamp_list.append(new_stamp)
 
-    old_stamp = stamp_list.pop(0)
-    snake.clearstamp(old_stamp)
-    pos_list.pop(0)
+
 
     new_pos = snake.pos()
     new_x_pos = new_pos[0]
     new_y_pos = new_pos[1]
 
-        
+
     if snake.pos() in pos_list[:-1]:
         print("you ate yourself ! Game over!")
         quit()
@@ -171,8 +183,12 @@ def move_snake():
         food_stamps.pop(food_ind) #Remove eaten food stamp
         print("You have eaten the food!")
         make_food()
+    else:
+        old_stamp = stamp_list.pop(0)
+        snake.clearstamp(old_stamp)
+        pos_list.pop(0)
     #HINT: This if statement may be useful for Part 8
-
+    
     ...
     #Don't change the rest of the code in move_snake() function:
     #If you have included the timer so the snake moves 
@@ -198,6 +214,7 @@ def move_snake():
         quit()
 
 
+    turtle.ontimer(move_snake,TIME_STEP)
 
 
 turtle.register_shape("trash.gif") #Add trash picture
@@ -220,7 +237,7 @@ food_stamps = []
 #3. saves the stamp by appending it to the food_stamps list using
 # food_stamps.append(    )
 #4. Don’t forget to hide the food turtle!
-
+snake.color("blue")
 for this_food_pos in food_pos :
 
 
@@ -230,6 +247,4 @@ for this_food_pos in food_pos :
     food_stamps.append(stamp_ID)
    
 move_snake()
-
-
 
