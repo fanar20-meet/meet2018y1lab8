@@ -1,6 +1,6 @@
 import turtle
 import random #We'll need this later in the lab
-
+import time
 cube = turtle.clone()
 cube.hideturtle()
 cube.penup()
@@ -11,7 +11,10 @@ cube.goto(-300,-300)
 cube.goto(-300,300)
 cube.goto(300,300)
 
-title =
+screen = turtle.Screen()
+
+
+
 
 
 turtle.tracer(1,0) #This helps the turtle move more smoothly
@@ -200,6 +203,7 @@ def move_snake():
 # The next three lines check if the snake is hitting the 
 # right edge.
 
+
     if new_x_pos >= RIGHT_EDGE:
         print("You hit the right edge! Game over!")
         quit()
@@ -207,14 +211,16 @@ def move_snake():
         print("you hit the left edge! Game over!")
         quit()
     elif new_y_pos >= UP_EDGE:
-        print("you hit the left edge! Game over!")
+        print("you hit the up edge! Game over!")
         quit()
     elif new_y_pos <= DOWN_EDGE:
-        print("you hit the left edge! Game over!")
+        print("you hit the down edge! Game over!")
+        screen.bgpic("GO.jpg")
+        time.sleep(2)
         quit()
 
-
     turtle.ontimer(move_snake,TIME_STEP)
+
 
 
 turtle.register_shape("trash.gif") #Add trash picture
