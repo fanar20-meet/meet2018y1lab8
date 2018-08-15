@@ -4,12 +4,12 @@ import time
 cube = turtle.clone()
 cube.hideturtle()
 cube.penup()
-cube.goto(300,300)
+cube.goto(400,400)
 cube.pendown()
-cube.goto(300,-300)
-cube.goto(-300,-300)
-cube.goto(-300,300)
-cube.goto(300,300)
+cube.goto(400,-400)
+cube.goto(-400,-400)
+cube.goto(-400,400)
+cube.goto(400,400)
 
 screen = turtle.Screen()
 
@@ -19,8 +19,8 @@ screen = turtle.Screen()
 
 turtle.tracer(1,0) #This helps the turtle move more smoothly
 
-SIZE_X=650
-SIZE_Y=650
+SIZE_X=1000
+SIZE_Y=1000
 turtle.setup(SIZE_X, SIZE_Y) #Curious? It's the turtle window  
                              #size. 
 turtle.penup()
@@ -80,10 +80,10 @@ DOWN = 1
 LEFT = 2
 RIGHT = 3
 direction = UP
-UP_EDGE = 300
-DOWN_EDGE = -300
-RIGHT_EDGE = 300
-LEFT_EDGE = -300
+UP_EDGE = 400
+DOWN_EDGE = -400
+RIGHT_EDGE = 400
+LEFT_EDGE = -400
 
 def up():
     global direction #snake direction is global (same everywhere)
@@ -128,7 +128,6 @@ def make_food():
     food_x = random.randint(min_x,max_x)*SQUARE_SIZE
     food_y = random.randint(min_y,max_y)*SQUARE_SIZE
     food.goto(food_x,food_y)
-    food_pos.append((food_x,food_y))
     stamp_ID = food.stamp()
     food_stamps.append(stamp_ID)
 
